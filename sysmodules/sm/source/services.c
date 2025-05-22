@@ -9,6 +9,14 @@ This is part of 3ds_sm, which is licensed under the MIT license (see LICENSE for
 #include "services.h"
 #include "processes.h"
 #include "list.h"
+#include "ssl.h"
+
+typedef void (*PatchFunc)(u32 pid);
+
+typedef struct {
+    const char* svcName;
+    PatchFunc   patcher;
+} PatchEntry;
 
 ServiceInfo servicesInfo[0xA0] = { 0 };
 u32 nbServices = 0; // including "ports" registered with getPort
@@ -109,6 +117,17 @@ Result doRegisterService(u32 pid, Handle *serverPort, const char *name, s32 name
 
 Result RegisterService(SessionData *sessionData, Handle *serverPort, const char *name, s32 nameSize, s32 maxSessions)
 {
+    static const PatchEntry patchTable[] = {
+        { "ssl:C", SSLPatchs }
+    };
+
+    for (unsigned i = 0; i < sizeof(patchTable)/sizeof(patchTable[0]); ++i) {
+        if (areServiceNamesEqual(name, patchTable[i].svcName, nameSize)) {
+            patchTable[i].patcher(sessionData->pid);
+            break;
+        }
+    }
+
     return doRegisterService(sessionData->pid, serverPort, name, nameSize, maxSessions);
 }
 
