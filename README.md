@@ -1,4 +1,4 @@
-# Luma3DS
+# Luma3DSPatches
 
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/LumaTeam/Luma3DS/total)
 ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
