@@ -83,3 +83,8 @@ static inline void assertSuccess(Result res)
     if(R_FAILED(res))
         panic(res);
 }
+
+static inline void WriteString(Handle hDebug, const char* text, u32 address) {
+    u32 len = (u32)(strlen(text) + 1);
+    svcWriteProcessMemory(hDebug, text, address, len);
+}

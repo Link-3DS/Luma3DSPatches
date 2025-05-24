@@ -1,5 +1,5 @@
 # Luma3DSPatches
-- Luma3DS fixes and reimplements important parts of the system software for all models in the Nintendo 3DS family. It aims to significantly improve the user experience and ensure compatibility with the 3DS well beyond its end of life. Patches have also been added to allow connection to different networks such as Pretendo/Link3DS.
+Luma3DS fixes and reimplements important parts of the system software for all models in the Nintendo 3DS family. It aims to significantly improve the user experience and ensure compatibility with the 3DS well beyond its end of life. Patches have also been added to allow connection to different networks such as Pretendo/Link3DS.
 
 ## Licensing
 This software is licensed under the terms of the GPLv3. You can find a copy of the license in the LICENSE.txt file.

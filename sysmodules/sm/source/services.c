@@ -9,7 +9,9 @@ This is part of 3ds_sm, which is licensed under the MIT license (see LICENSE for
 #include "services.h"
 #include "processes.h"
 #include "list.h"
+
 #include "ssl.h"
+#include "friends.h"
 
 typedef void (*PatchFunc)(u32 pid);
 
@@ -118,7 +120,8 @@ Result doRegisterService(u32 pid, Handle *serverPort, const char *name, s32 name
 Result RegisterService(SessionData *sessionData, Handle *serverPort, const char *name, s32 nameSize, s32 maxSessions)
 {
     static const PatchEntry patchTable[] = {
-        { "ssl:C", SSLPatchs }
+        { "ssl:C", PatchSSLModule },
+        { "frd:a", PatchFriendsModule }
     };
 
     for (unsigned i = 0; i < sizeof(patchTable)/sizeof(patchTable[0]); ++i) {
